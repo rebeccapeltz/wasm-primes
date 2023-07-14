@@ -15,7 +15,7 @@ interface Props {
 
 
 export const getServerSideProps: GetServerSideProps<{ values: Number[], diffs: Number[] }> = async (context) => {
-  const API_URL = 'https://wasm-test-git-main-rebeccapeltz.vercel.app/api/primes';
+  const API_URL = 'https://wasm-primes.vercel.app/api/primes';
   // const API_URL = 'http:/localhost:3000/api/primes';
 
   const res = await fetch(API_URL)
