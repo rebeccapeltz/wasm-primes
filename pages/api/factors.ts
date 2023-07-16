@@ -7,32 +7,29 @@ import { NextRequest, NextResponse } from "next/server";
 // import addWasm from '../../add.wasm?module'
 import releaseWasm from "../../release.wasm?module";
 
-
-
-
-
 // const module$ = WebAssembly.instantiate(addWasm)
 const module$ = WebAssembly.instantiate(releaseWasm);
 
 export default async function handler() {
   const instance = (await module$) as any;
   const exports = instance.exports as AssemblyExports;
-  const { get1000Primes, memory } = exports;
-  get1000Primes();
+  const { primeFactors, memory } = exports;
+  const start = Date.now();
+  primeFactors();
   const wasmByteMemoryArray = new Uint32Array(memory.buffer);
-
+  const end = Date.now();
+  const executionTime = `${end - start} ms`
+  console.log(`Factors Execution time: ${executionTime}`);
   // Get 1st 1000 Primes
-  const prime1000 = wasmByteMemoryArray.slice(0, 1000);
-  // Get 2nd 1000 Diffs
-  const primeDiffs = wasmByteMemoryArray.slice(1000, 2000);
-  const primes = [];
-  const diffs = []
-  for (let i = 0; i < prime1000.length; i++) {
-    primes.push(prime1000[i]);
-    diffs.push(primeDiffs[i])
+  const primeFactor = wasmByteMemoryArray.slice(2000, 2030);
+
+  const primeFactorCounts = [];
+
+  for (let i = 0; i < primeFactor.length; i++) {
+    primeFactorCounts.push(primeFactor[i]);
   }
   return NextResponse.json({
-    values: primes,
-    diffs: diffs
+    values: primeFactorCounts,
+    executiontime: executionTime
   });
 }

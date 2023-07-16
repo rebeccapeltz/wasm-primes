@@ -13,7 +13,7 @@ import {
 import { Line } from 'react-chartjs-2';
 
 interface Props {
-    diffs: Number[];
+    factors: Number[];
   }
 
 ChartJS.register(
@@ -36,27 +36,27 @@ export const options = {
         },
         title: {
             display: true,
-            text: 'Difference Between Primes',
+            text: 'Number of Prime Factors for 1st 10,000,000 Integers',
         },
     },
 };
 
 const labels:Number[] = [];
-for (let i=0; i<1000; i++){
+for (let i=1; i<=29; i++){
     labels.push(i)
 }
 
-export function DiffsAreaChart(props:Props) {
+export function FactorsAreaChart(props:Props) {
 
     const data = {
         labels,
         datasets: [
             {
                 fill: false,
-                label: 'Difference Between Primes',
-                data: props.diffs,
-                borderColor: 'rgb(9, 121, 105)',
-                backgroundColor: 'rgb(9, 121, 105)',
+                label: '# of Prime Factors',
+                data: props.factors,
+                borderColor: 'rgb(138,43,226)',
+                backgroundColor: 'rgb(138,43,226)',
                 borderWidth: 1,
                 pointBorderWidth: 3
                       },

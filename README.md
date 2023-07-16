@@ -69,3 +69,5 @@ export const getStaticProps = async () => {
 }
 
 ```
+
+https://radu-matei.com/blog/practical-guide-to-wasm-memory/
