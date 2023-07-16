@@ -26,8 +26,8 @@ export const getServerSideProps: GetServerSideProps<{ values: Number[], diffs: N
   const values = data.values;
   const diffs = data.diffs;
 
-  const FACTORS_API_URL = 'https://wasm-primes.vercel.app/api/factors';
-  // const FACTORS_API_URL = 'http:/localhost:3000/api/factors'
+  // const FACTORS_API_URL = 'https://wasm-primes.vercel.app/api/factors';
+  const FACTORS_API_URL = 'http:/localhost:3000/api/factors'
   const resFactors = await fetch(FACTORS_API_URL)
   const dataFactors = await resFactors.json()
   const factors = dataFactors.values;
